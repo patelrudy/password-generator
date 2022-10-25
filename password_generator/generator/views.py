@@ -44,7 +44,7 @@ def generate_password(request):
         for x in range(length):
             passW += random.choice(characters)
     except:
-        passW = 'ERROR: Select an option to generate password'
+        passW = 'ERROR: Select an option'
     return passW
 
 def passwordElements(element):
