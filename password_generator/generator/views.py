@@ -1,8 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 import random
-# Create your views here.
-
 
 def home(request):
     return render(request, 'generator/home.html')
@@ -31,13 +28,13 @@ def generate_password(request):
         if request.GET.get('lowercase'):
             characters.extend(passwordElements('lowercase'))
 
-        if request.GET.get('special'):
+        if request.GET.get('specialChar'):
             characters.extend(passwordElements('specialChar'))
 
         if request.GET.get('numbers'):
             characters.extend(passwordElements('numbers'))
 
-        length = int(request.GET.get('length', 14))
+        length = int(request.GET.get('length'))
 
         passW = ''
 
