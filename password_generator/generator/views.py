@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+
 import random
 
 
@@ -9,7 +11,7 @@ def home(request):
 def password_generator(request):
     return render(request, 'generator/password-generator.html')
 
-
+@csrf_exempt
 def password(request):
     passW = generate_password(request)
     return render(request, 'generator/password.html', {'password': passW})
@@ -23,8 +25,8 @@ def generate_password(request):
 
     characters = list()
     print("hello world")
-    print(request.GET)
-    json = request.GET
+    print(request.POST)
+    json = request.POST
     flag = 'on'
     password_length = json['pass_size']
     if json.get('uppercase') == flag:
