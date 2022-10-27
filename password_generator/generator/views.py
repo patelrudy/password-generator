@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import random
 
+
 def home(request):
     return render(request, 'generator/home.html')
 
@@ -15,36 +16,42 @@ def password(request):
 
 
 def about(request):
-
     return render(request, 'generator/about.html')
 
+
 def generate_password(request):
-    try:
-        characters = list()
 
-        if request.GET.get('uppercase'):
-            characters.extend(passwordElements('uppercase'))
+    characters = list()
+    print("hello world")
+    print(request.GET)
+    json = request.GET
+    flag = 'on'
+    password_length = json['pass_size']
+    if json.get('uppercase') == flag:
+        characters.extend(passwordElements('uppercase'))
 
-        if request.GET.get('lowercase'):
-            characters.extend(passwordElements('lowercase'))
+    if json.get('lowercase') == flag:
+        characters.extend(passwordElements('lowercase'))
 
-        if request.GET.get('specialChar'):
-            characters.extend(passwordElements('specialChar'))
+    if json.get('specialChar') == flag:
+        characters.extend(passwordElements('specialChar'))
 
-        if request.GET.get('numbers'):
-            characters.extend(passwordElements('numbers'))
+    if json.get('numbers') == flag:
+        characters.extend(passwordElements('numbers'))
 
-        length = int(request.GET.get('length'))
+    if len(characters) == 0:
+        passW = "Error: Please select an option"
+        return passW
+    passW = ''
+    print(password_length)
+    for x in range(int(password_length)):
+        passW += random.choice(characters)
 
-        passW = ''
-
-        for x in range(length):
-            passW += random.choice(characters)
-    except:
-        passW = 'ERROR: Select an option'
     return passW
 
+
 def passwordElements(element):
-    dictionary = {'uppercase': list('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 'lowercase': list('abcefghijklmnopqrstuvwxyz'), 'numbers': list('0123456789'), 'specialChar': list(')_+="\:;&/~!$%^.*@#(|?><')}
+    dictionary = {'uppercase': list('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 'lowercase': list(
+        'abcefghijklmnopqrstuvwxyz'), 'numbers': list('0123456789'), 'specialChar': list(')_+="\:;&/~!$%^.*@#(|?><')}
 
     return dictionary[element]
