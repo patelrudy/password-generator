@@ -1,7 +1,7 @@
-<div>
+<!-- <div>
     <h1>
         Created by <a href="https://patelrudy.github.io/personal_website" target="_blank">Rudresh
-        Patel</a><br>
+            Patel</a><br>
     </h1>
 
     <br>
@@ -11,5 +11,75 @@
         </a>
 
     </h2>
+</div> -->
 
-</div>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>About</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <style>
+        body,
+        h1 {
+            font-family: "Raleway", sans-serif
+        }
+
+        body,
+        html {
+            height: 100%
+        }
+
+        .bgimg {
+            /* background-image: url("https://drive.google.com/file/d/14Tl3LB-rGglmf6KjChfU6XqkmaL51kzj/view"); */
+            background-color: rgb(11, 46, 80);
+            min-height: 100%;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+        <div class="w3-display-middle ">
+            <!-- <h1 class="w3-jumbo w3-animate-top">Created by</h1> -->
+            <h1 class="w3-jumbo w3-animate-top" style="display:inline"> Created by </h1>
+            <h2 class="w3-jumbo w3-animate-top w3-text-red" style="display:inline"> Rudresh Patel</h2>
+            <div class="w3-large w3-center">
+                <p class="w3-padding-8">
+                <form action="https://patelrudy.github.io/personal_website/">
+                    <button class="w3-button w3-teal">
+                        Web Profile
+                    </button>
+                </form>
+                </p>
+            </div>
+            <hr class="w3-border-grey" style="margin:auto;width:40%">
+            <div class="w3-large w3-center">
+                <p class="w3-padding-8">
+                <form action="{% url 'password-generator' %}">
+                    <button class="w3-button w3-teal">
+                        Password Generator
+                    </button>
+                </form>
+                </p>
+                <form action="{% url 'home' %}">
+                    <p class="w3-padding-5">
+                        <button class="w3-button w3-teal">
+                            Home
+                        </button>
+                </form>
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
