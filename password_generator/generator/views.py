@@ -24,10 +24,10 @@ def about(request):
 def generate_password(request):
 
     characters = list()
-    print("hello world")
     print(request.POST)
     json = request.POST
     flag = 'on'
+    group_length = json['group_size']
     password_length = json['pass_size']
     if json.get('uppercase') == flag:
         characters.extend(passwordElements('uppercase'))
@@ -41,19 +41,37 @@ def generate_password(request):
     if json.get('numbers') == flag:
         characters.extend(passwordElements('numbers'))
 
-    if len(characters) == 0:
-        passW = "Error: Please select an option"
-        return passW
     passW = ''
-    print(password_length)
-    for x in range(int(password_length)):
-        passW += random.choice(characters)
+
+    if len(characters) == 0:
+        return noCheckBoxError(True)
+    
+    passW = passwordString(password_length, group_length, characters)
+    
 
     return passW
 
+def passwordString(password_length, group_length, characters):
+    passW = ''
+    group_length = int(group_length)
+    for i in range(int(password_length)):
+        if group_length == 0 or i == 0:
+            passW += random.choice(characters)
+        else:
+            if i % group_length == 0:
+                passW += '-'
+            passW += random.choice(characters)
+        
+    return passW
 
 def passwordElements(element):
     dictionary = {'uppercase': list('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 'lowercase': list(
         'abcefghijklmnopqrstuvwxyz'), 'numbers': list('0123456789'), 'specialChar': list(')_+="\:;&/~!$%^.*@#(|?><')}
 
     return dictionary[element]
+
+def noCheckBoxError(bool):
+    if (bool):
+        return "Error: Please select a checkbox criteria!"
+    else:
+        return ''
